@@ -1,28 +1,38 @@
-#!/usr/bin/env python3
-
-from app import app
-from models import db, Plant
-
+from app import app, db, Plant
 
 with app.app_context():
+    # Drop all tables and recreate them
+    db.drop_all()
+    db.create_all()
 
-    Plant.query.delete()
+    # Add sample plants
+    plants = [
+        Plant(name="Aloe Vera", image="https://example.com/aloe.png", price=10.5, is_in_stock=True),
+        Plant(name="Snake Plant", image="https://example.com/snake.png", price=15.0, is_in_stock=True),
+        Plant(name="Peace Lily", image="https://example.com/peace.png", price=20.0, is_in_stock=False),
+    ]
 
-    aloe = Plant(
-        id=1,
-        name="Aloe",
-        image="./images/aloe.jpg",
-        price=11.50,
-        is_in_stock=True,
-    )
-
-    zz_plant = Plant(
-        id=2,
-        name="ZZ Plant",
-        image="./images/zz-plant.jpg",
-        price=25.98,
-        is_in_stock=False,
-    )
-
-    db.session.add_all([aloe, zz_plant])
+    db.session.add_all(plants)
     db.session.commit()
+
+    print("🌱 Database seeded with sample plants!")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
