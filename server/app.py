@@ -28,9 +28,9 @@ class Plant(db.Model):
             "is_in_stock": self.is_in_stock,
         }
 
-# --------------------
+
 # ROUTES
-# --------------------
+
 
 # GET all plants
 @app.route('/plants', methods=['GET'])
